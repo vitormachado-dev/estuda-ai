@@ -1,0 +1,12 @@
+# chave da API (nunca pode ir pro GitHub)
+.env
+
+# ambiente virtual (cada um cria o seu)
+venv/
+
+# arquivos de cache do Python
+__pycache__/
+
+# PDFs e o índice gerado (têm conteúdo de terceiros)
+*.pdf
+indice.json
