@@ -1,8 +1,13 @@
 # Estuda AI 📚🤖
 
-Assistente de estudos que responde perguntas sobre o conteúdo de PDFs usando **RAG (Retrieval-Augmented Generation)** com a API do Google Gemini.
+Assistente de estudos que responde perguntas e gera flashcards a partir do conteúdo de PDFs, usando **RAG (Retrieval-Augmented Generation)** com a API do Google Gemini.
 
 Criei este projeto para resolver um problema real meu: estudo para concursos de TI com muito material em PDF e queria uma forma rápida de tirar dúvidas e revisar o conteúdo.
+
+## Funcionalidades
+
+- **Perguntas e respostas:** faça perguntas sobre o material e receba respostas baseadas apenas no conteúdo do PDF
+- **Gerador de flashcards:** escolha um tema e gere flashcards prontos para importar no Anki
 
 ## Como funciona
 
@@ -18,6 +23,8 @@ PDF → extração de texto → limpeza → chunks → embeddings → busca por 
 
 O modelo é instruído a responder **somente com base no material**. Se a informação não estiver no PDF, ele avisa em vez de inventar, o que reduz alucinações.
 
+Os flashcards usam **saída estruturada (JSON com schema definido)**, garantindo que cada card tenha sempre pergunta e resposta no formato esperado pelo código.
+
 ## Estrutura
 
 | Arquivo | Responsabilidade |
@@ -25,17 +32,19 @@ O modelo é instruído a responder **somente com base no material**. Se a inform
 | `chunks.py` | Extração, limpeza e divisão do texto |
 | `busca.py` | Geração de embeddings, índice e busca por similaridade |
 | `responder.py` | Montagem do prompt e geração da resposta |
+| `flashcards.py` | Geração de flashcards por tema, com saída estruturada e exportação para CSV/Anki |
 
 ## Tecnologias
 
 - Python
 - Google Gemini API (geração de texto e embeddings)
 - pypdf
+- Pydantic
 
 ## Como rodar
 
 ```bash
-git clone https://github.com/SEU_USUARIO/estuda-ai.git
+git clone https://github.com/vitormachado-dev/estuda-ai.git
 cd estuda-ai
 python -m venv venv
 venv\Scripts\activate
@@ -44,14 +53,24 @@ pip install -r requirements.txt
 
 Crie um arquivo `.env` com base no `.env.example` e coloque sua chave do [Google AI Studio](https://aistudio.google.com).
 
-Coloque um PDF na pasta com o nome `aula.pdf` e execute:
+Coloque um PDF na pasta com o nome `aula.pdf`.
+
+**Para fazer perguntas sobre o material:**
 
 ```bash
 python responder.py
 ```
 
+**Para gerar flashcards sobre um tema:**
+
+```bash
+python flashcards.py
+```
+
+Os flashcards são salvos em `flashcards.csv` (separados por `;`), prontos para importar no Anki.
+
 ## Próximos passos
 
-- [ ] Geração automática de flashcards
+- [x] Geração automática de flashcards
 - [ ] Novas tentativas automáticas em caso de instabilidade da API
 - [ ] Suporte a vários PDFs

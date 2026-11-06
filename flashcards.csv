@@ -1,0 +1,5 @@
+Como o processo é representado no modelo espiral de Boehm?;O processo é representado como uma espiral ao invés de uma sequência de atividades com retornos.
+Existem fases fixas, como especificação ou projeto, no modelo espiral?;Não, não existem fases fixas. Os loops na espiral são escolhidos de acordo com a necessidade.
+O que cada loop na espiral representa?;Cada loop na espiral representa uma fase do processo.
+Como os riscos são tratados no modelo espiral?;Os riscos são avaliados explicitamente e resolvidos no decorrer do processo.
+Quais são os quatro setores do modelo espiral?;Definição de objetivos, avaliação e redução de riscos, desenvolvimento e validação, e planejamento.
