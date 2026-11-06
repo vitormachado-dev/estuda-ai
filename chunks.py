@@ -15,7 +15,7 @@ def remover_repetidas(paginas):
     contagem = Counter(
         normalizar(linha) for pagina in paginas for linha in pagina.splitlines()
     )
-    limite = len(paginas) * 0.3
+    limite = max(2, len(paginas) * 0.3)   # no mínimo 2: linha que aparece 1 vez nunca é cabeçalho
 
     texto_limpo = []
     for pagina in paginas:
