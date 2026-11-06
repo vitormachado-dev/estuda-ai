@@ -1,4 +1,4 @@
-from busca import client, carregar_indice, criar_indice, buscar, ARQUIVO_INDICE
+from busca import client, carregar_indice, criar_indice, buscar, ARQUIVO_INDICE, com_novas_tentativas
 
 MODELO_RESPOSTA = "gemini-3.5-flash-lite"
 
@@ -18,10 +18,12 @@ RESPOSTA:"""
 
 
 def responder(pergunta, indice):
-    trechos = buscar(pergunta, indice)          # 1. busca os trechos mais parecidos
-    prompt = montar_prompt(pergunta, trechos)    # 2. monta o prompt com os trechos
-    resposta = client.models.generate_content(   # 3. manda pra IA responder
-        model=MODELO_RESPOSTA, contents=prompt
+    trechos = buscar(pergunta, indice)
+    if not trechos:   # nada relevante: nem chama a IA
+        return "Não encontrei essa informação no material."
+    prompt = montar_prompt(pergunta, trechos)
+    resposta = com_novas_tentativas(
+        lambda: client.models.generate_content(model=MODELO_RESPOSTA, contents=prompt)
     )
     return resposta.text
 
