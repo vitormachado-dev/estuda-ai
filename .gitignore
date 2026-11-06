@@ -10,3 +10,5 @@ __pycache__/
 # PDFs e o índice gerado (têm conteúdo de terceiros)
 *.pdf
 indice.json
+
+flashcards.csv
